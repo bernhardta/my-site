@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="us-en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="../blog.css">
+  <link rel="icon" href="../../icon.png" type="image/x-icon">
+  <script src="../blog.js"></script>
+</head>
+<title>
+	Skinless: MT240 arduino/transistor test
+</title>
+
+<body>
+	<div class="header">
+  <h2>Skinless Blog</h2>
+</div>
+
+<div class="row">
+  <div class="rightcolumn">
+  	<div class="card">
+      <h3><a style="font-size: 150%;" href="../blog.html" title="bio"><i>A blog for skinless thoughts ...</i></a></h3>
+    </div>
+  </div>
+
+  <div class="leftcolumn">
+    <div class="card">
+      <img src="../seemore.png" alt="Seemore Skinless" style="width:100px;height:100px; float:right;">
+      <h4 style="font-size:150%;">Test using Arduino and a transistor</h4>
+      <h5>Jan 19, 2022</h5>
+        <p>The MT-240 has a keyboard. And each key is a momentary switch (a button) that corresponds to a spot in a keyboard matrix [link]. So when a key is pressed...an electrical connection is made between a row and column in the matrix, which tells the CPU which note to play. For example, pressing the 'A4' key corresponds to row 4, col 11 on the MT-240.</p>
+        <p>But we can use other types of switches too! Like a transistor. So I connected a Arduino to my computer to supply power to it, and found a <a href="https://create.arduino.cc/projecthub/SBR/switching-using-transistor-c9114a" title="simple transistor arduino setup" target="_blank">simple code & breadboard setup</a> online.</p>
+        <p>Instead of the LED, I connected wires from the Collector and Emitter pins that led to the keyboard matrix. It worked! With a time delay of 1000ms, it alternatingly played & stopped a note every second.</p>
+
+  	</div>
+  	<div class="card" style="background: #ddd;">
+  		<button style="background-color:#4CAF00; border:none; color:white;padding:15px 32px; display:inline-block; font-size:16px;" onclick="topFunction()" id="toTop" title="Go to top">Back to top</button>
+	  </div>
+  </div>
+</body>
+</html>

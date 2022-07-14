@@ -1,0 +1,18 @@
+html * {
+   color: #F00 !important;
+   font-family: Arial
+}
+
+body {
+	padding: 10px 0px 0 50px;
+  	background-image: url("bg.jpg");
+  	background-repeat:
+}
+.head {
+	font-size: 150%
+}
+.para {
+	font-size: 100%
+	padding-left: 10px
+	padding-right: 10px
+}

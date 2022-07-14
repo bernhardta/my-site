@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="us-en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="../blog.css">
+  <link rel="icon" href="../../icon.png" type="image/x-icon">
+  <script src="../blog.js"></script>
+</head>
+<title>
+	MT-240: arduino/transistor test
+</title>
+
+<body>
+	<div class="header">
+  <h2>Skinless Blog</h2>
+</div>
+
+<div class="row">
+  <div class="rightcolumn">
+  	<div class="card">
+      <h3><a style="font-size: 150%;" href="../blog.html" title="bio"><i>A blog for skinless thoughts ...</i></a></h3>
+    </div>
+  </div>
+
+  <div class="leftcolumn">
+    <div class="card">
+      <img src="../seemore.png" alt="Seemore Skinless" style="width:100px;height:100px; float:right;">
+      <h4 style="font-size:150%;">Test using Arduino and a transistor</h4>
+      <h5>Jan 19, 2022</h5>
+        <p>The MT-240 has a keyboard. And each key is a momentary switch (a button) that corresponds to a spot in a keyboard matrix [link]. So when a key is pressed...an electrical connection is made between a row and column in the matrix, which tells the CPU which note to play. For example, pressing the 'A4' key corresponds to row 4, col 11 on the MT-240.</p>
+        <p>But we can use other types of switches too! Like a transistor. So I connected a Arduino to my computer to supply power to it, and found a <a href="https://create.arduino.cc/projecthub/SBR/switching-using-transistor-c9114a" title="simple transistor arduino setup" target="_blank">simple code & breadboard setup</a> online.</p>
+        <p>Instead of the LED, I connected wires from the Collector and Emitter pins that led to the keyboard matrix. It worked! With a time delay of 1000ms, it alternatingly played & stopped a note every second.</p>
+        <p>Next, I wanted to find out how fast notes could be played in this method. I set the time delay to 1ms to see what would happen. It played a single continuous note...as if the player was holding down the key instead of hammering it. I went up slowly, from 1 to 2, to 5, to 10, to 50. At 50ms, individual notes were being played!!! Then I went down to see what the limit was. Here is what I found...</p>
+        <p>At 26ms and below, the MT-240 doesn't recognize individual keypresses on the matrix. Between 27ms and 29ms, the effect is inconsistent...sometimes the note is held out and sometimes it is hammered. At 27ms, more notes were held out, and at 29ms, more notes were hammered. And at 30ms and above, individual keypresses are detected.</p>
+        <p>Why does this happen? I don't know. My theory at the moment is that the CPU clock speed is around 30ms, and can thus only handle new inputs at that speed or slower.</p>
+        <p>Another thing I noticed is that <i>only</i> the Brass tone button doesn't work while this is going on! No clue.</p>
+        <p>Lastly, I plugged this setup into the ROM patch bay[link] to see what would happen. It's pretty cool. By switching a setting on and off at fast intervals, the tone of the sound changes from normal to altered quickly, making something new that is sort of a mix of both.</p>
+        <p>I have some plans for the next step with transistors and arduino and the MT-240. Once more transistors arrive in the mail (they are so cheap, 250 for 7$) I will see how far I can go with this...My goal is to eventually have ALL the keys hooked up individually to transistor chips...so by programming them individually, I could program a song, or a chromatic sweep of all keys, and maybe also a way to consistently press a key and activate a particular ROM setting at an exact time interval in ms...I'll post an update when the time comes[link].</p>
+        <p>Thanks for reading !!! ^u^ </p>     
+  	</div>
+  	<div class="card" style="background: #ddd;">
+  		<button style="background-color:#4CAF00; border:none; color:white;padding:15px 32px; display:inline-block; font-size:16px;" onclick="topFunction()" id="toTop" title="Go to top">Back to top</button>
+	  </div>
+  </div>
+</body>
+</html>

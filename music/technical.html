@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="technical.css">
+</head>
+<title>
+	Cryptwarblr
+</title>
+<body>
+	<left>
+	<h1 class="mt-5"> Cryptwarblr Technical Details<hr></h1>
+   	<p class="head">
+   		<strong>Introduction</strong></p>
+   	<p class="para">
+   		The Casiotone MT-240 uses pulse code modulation to convert digital data into an analog waveform. It can produce 30 different preset Tones, each represented by unique digital data stored in the ROM chip. 20 of those are selectable by buttons. When the user plays the keyboard, the processor detects which key is pressed through use of a keyboard matrix. It sends to the ROM the address for the data of that Tone/note. The ROM returns the data to the processor, which assembles it mathematically and passes it on to the DAC chip. The waveform is synthesized into an analog signal and amplified in stages until it reaches the speakers or external headphones. Meanwhile, background processes are assisting the processor in memory, polyphony, and clock.
+   	<p class="head">
+   		<strong>Power-On</strong></p>  
+   	<p class="para">
+   		Power-On is accomplished in two stages. First, the synth must be plugged in or have batteries inserted. This begins power supply to the Voltage Regulator chip, which distributes power to the other chips. But the synth appears no different- none of the LEDs light and the keys don't play. This is because the 'POWER switch' must also be enabled, which gives the processor the command to begin communicating with the ICs.</p>
+   	<p class="head">
+   		<strong>Keyboard & Button Matrices</strong></p>  
+   	<p class="para">
+   		When you press a key, you are pressing a momentary switch that forms an electrical connection between two pins on the processor, organized into rows and columns on a matrix. For example, pressing the 'A4' key corresponds to row 4, col 11, and the processor detects this short circuit between r4-c11. Diodes in series with each key allow the processor to distinguish between individual keys. All buttons, including the Tone and Rhythm buttons, also work this way, organized in a separate matrix.</p>
+   	<p class="para">
+   		There are some empty spaces in both the keyboard and buttons matrices, which correspond to some hidden functions, ones that the processor was designed to handle but were never implemented for the user. For example, the keyboard matrix actually can give 61 combinations (5 octaves), but only 49 (4 octaves) of keys are on the keyboard. Even though the processor can synthesize that hidden upper octave, the user is unable to do so without hacking.</p>
+   	<p class="head">
+   		<strong>Tones and Pitches</strong></p>  
+   	<p class="para">	
+   		There are 20 preset Tones (actually 30 via hidden button matrix functions) available to chose from. The data for producing each Tone were sculpted into the ROM by the programmers. Each parameter in a Tone (the attack, decay, sustain, release, pitch, and others) exist separately in the ROM, until it is it retrieved by the processor for assembling via Pulse Code Modulation into its final digital form.</p>
+      <p class="para">
+         As the pitch increments for each key up, the timbre of the note starts to change and subtle adjustmentments are needed to maintain the sense of synthesizing a realistic instrument. So the user does not notice, there is often a subtle change in parameter from one note to another, so that the attack parameter might stay the same for all 61 notes in a Tone, but the sustain parameter is slightly different above or below a note threshold.</p>    
+   	<p class="para">
+   		To achieve a variety of sounds from Harps to Strings to Percussion, the parameters can be wildly different. For example, the PIANO sustain is very short, only about 4s. The BRASS sustain is much longer (infinite, until the key is let go.) The BASS Tone has a purposefully distinct parameter threshold at B3-C3 to emulate a plucked string bass on the lower octaves and a slap bass on the upper octaves. The HARP release is very short, less than 1s, and the BELLS release is much longer, about 12s, and goes silent in intervals to emulate an echo effect. The RE-ORGAN release increases in volume sharply, sounding like another attack. And the PERCUSSION sounds don't have an incrementing pitch parameter, and each key has its own totally unique set.</p>
+   	<p class="para">	
+   		Except for Perucussion, since each Tone uses the same 61 keys, it is possible that the frequency of each note does not need to be read as a parameter from the ROM. The waveform of each Tone's sustain portion is a fixed length, and the processor multiplies the wavelength by 2<super>1/12</super>for each half-step up.</p>  
+   	<p class="head">
+   		<strong>ROM and Digital Data</strong></p>
+   	<p class="para">
+   		The processor has its own limited-space memory that only knows the addresses of the data in the ROM. An address is sent via the 18 Address Input (A) lines from the processor to the ROM chip. The corresponding data is then sent out of its 16 Data Output (D) lines back to the processor. This happens extremely quickly and repeatedly, and in a sequence that allows the processor to mathmatically assemble the data into its final form to be sent to the DAC.</p>
+   	<p class="para">
+   		The ROM chip works with digital logic: a Low voltage V<sub>L</sub> represents a binary 0, and a High voltage V<sub>H</sub>represents a binary 1. For example, the ROM input will recieve addresses from the processor that are 18 bits, one bit on each (A) line. Normally, this might look something like 11 1010 1001 0000 111<strong>1</strong>. But when one of Address pins is forcibly grounded through circuit-bending (for example, A17, the Least Significant Bit), the data now looks like 11 1010 1001 0000 111<strong>0</strong>.</p>
+   	<p class="para">
+   		This new 16-bit address will now point to different data to be sent back to the CPU. And when the CPU reassembles the data, the modified section might be in right spot to change the timbre of the Tone. The heart of the circuit-bending aspect is here, by shorting and manipulating the Address and Data lines. Another way would be to connect a Data Output into an Address Input- forming a feedback loop. This is a great area of interest to me and is further explored here [link].
+  	   <p class="head">
+   		<strong>Analog Signal to Output</strong></p>
+   	<p class="para"> 
+   		Last, the processor sends the assembled digital data to the DAC. It converts the data into an analog signal with discrete samples. This signal is the same as the one that comes out of speakers at the end, except that it needs to go through a few amplification stages. First, it is amplified by an Op-Amp system to a level that is a bit louder, so that it can be adjusted by a volume slider (variable resistor) with reasonable margins. Then, it is put through a power amplifier IC, where it reaches line level, or the level of amplification a speaker expects.</p>
+  	   <p class="para"> 
+		   Finally, the signal passes by the on-board speakers to reach GND. Alternatively, if something is plugged into the headphone jack, it bypasses the on-board speakers, due to the lesser resistance in the jack path, and travels out the jack instead and then to GND.</p>  		 
+ 	   <p class="head">
+   		<strong>Background processes</strong></p>
+   	<p class="para"> 
+   		Meanwhile, the CPU is communicating with other systems which support the keyboard. The power it gets is mediated by a Voltage Dectector, which ensures as little fluctuation in power as possible. Also, the CPU has an external, screwdriver adjustable tuning LC system and crystal system, which work together to set the clock-speed of the processor and pitch of the keyboard. It can be turned down and up a certain amount before crashing. Third, a MIDI system with photocoupler IC. Fourth, it controls a Flip-Flop IC that controls the LEDs, which indicates certain settings. And last, a transistor system, which is still of unknown function to me.</p>
+ 	<p class="head">
+   		<strong>Conclusion</strong></p>
+   	<p class="para"> 
+   		Please email me!</p> 
+</body>
+</html>

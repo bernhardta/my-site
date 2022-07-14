@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="us-en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="icon.png" type="image/x-icon">
+
+  <script type="text/javascript">
+          function playSound(el,soundfile) {
+              if (el.mp3) {
+                  if(el.mp3.paused) el.mp3.play();
+                  else el.mp3.pause();
+              } else {
+                  el.mp3 = new Audio(soundfile);
+                  el.mp3.play();
+              }
+          }
+      </script>
+
+
+<style>
+    .card {
+    }
+    .card:hover {
+        cursor: pointer;
+    }
+</style>
+      
+
+</head>
+<title>
+	Cryptwarblr
+</title>
+
+<body>
+
+<center><h1 style="padding-top:50px;">
+  Cryptwarblr
+</h1>
+    <img class="card" src="seemore.png" alt="Seemore Skinless" style="width:300px;height:300px;" onclick="playSound(this, 'MAHB.wav');"></a>
+<div>
+  <h2>The Menu</h2>
+        <a style="font-size: 200%;" href="music/bio.html" title="about">Cryptwarblr ==></a><br>
+       	<a style="font-size: 200%;" href="comic/w1-1.html" title="about">Wittheums ==></a><br>
+       	<a style="font-size: 200%;" href="blog/blog.html" title="about">Blog (todo) ==></a><br>
+       	
+</div>
+
+</body>
+</html>
