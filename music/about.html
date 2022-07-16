@@ -3,21 +3,46 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="technical.css">
-	<link rel="icon" href="../icon.png" type="image/x-icon">
 </head>
 <title>
 	Cryptwarblr
 </title>
 <body>
 	<left>
-	<h1 class="mt-5">About<hr></h1>
+	<h1 class="mt-5">Cryptwarblr circuit bending details<hr></h1>
    	<p class="para">
-   		The Cryptwarblr works by connecting combinations of pins on the ROM chip. This changes the synthesis parameters in unintended ways.</p> 
-      <p class="para">
-         Additionally, there are a few additional features I have implemented: a sustain pedal, an extra octave of keys, an extra 10 Tones, an external battery case, and a secondary keyboard.</p>
-      <p class="para"> 
-         I use a switchboard to activate the pin combinations.  
-      </p>
-
-</body>
+   		I use a circuit-bent Casiotone MT-240. With a patch bay connected to the ROM chip, various effects can be achieved by shorting combinations of pins. 
+   		Using a configurable switch board allows one choose the pin combinations and activate them at will. </p>  
+	<p class="para">
+		There are many possible effects (theoretially 36!=3.72x10^41), each with their own qualities, behaviors, limitations. In order to keep track of the information,
+		I write all the stuff I find in a little notebook! </p>
+	<p class="para">
+		The ROM chip has 18 Address input lines (A), 16 Data output lines (D), V+ and Gnd. This gives 7 general types of duo combinations, A+A, A+D, D+D, V+A, V+D, G+A, G+D.
+		V+G would be impossible because the chip's power lines would be shorted. </p>  
+	<p class="para">
+		The combinations, based on the type, will either have a useful active effect or passive effect. An active effect affects the sound already being synthesized.
+		A passive effect affects the keyboard so that playing a key will trigger the effect. </p>
+	<p class="para">
+		A passive effect will interact with each of the 30 preset 'Tones' differently. It might change the timbre, volume, panning, adsr durations, add a reverb, echo, gliss, tremolo, or change the scale (from chromatic), tuning, or register. Sometimes, all 61 keys will take on this effect, but more often, only part of the keyboard will, and the other parts might sound radically different, in either a good or bad way. </p>
+	<p class="para">
+		An active effect changes the sound already being synthesized by the central processor. Some only change timbre, some start a gliss motion, some add a non-linear 'sweeping echo' effect. 
+		Most of the active effects will disable the keyboard while activated. </p>
+	<p class="para">
+		But the most fun comes from combining these effects. They interact very non-linearly, and often times have a totally different function when combined! </p>
+	<p class="para">
+		My switchboard also has 10 turn 100 ohm pots to allow for fine tuning of the effects, so they work reliably and clearly. 
+		Also, I can use those pots to 'tween' between effects.</p>
+	<p class="para">
+		There are a couple additional modifications I've made to complement the ROM system. On top, there are five buttons which let me access all 30 'Tones.' 
+		The keyboard only came with buttons for 20 'Tones,' but the data is there. Currently, I have a button behind the keyboard that I must hold down during power-on for this to work. </p>
+	<p class="para">
+		On the top left, I have another patch bay, this one connected to the keyboard matrix system, which lets me connect things like the second keyboard below.
+		The second keyboard is an octave higher than the above keyboard. Like the 'Tones,' the keyboard is only 49 keys, but data for a higher octave exists. </p>
+	<p class="para">
+		Lastly, there exists the function of a sustain-type pedal. It works by cancelling all sounding tones except those whose keys are held down. </p>
+	<p class="para">
+		I'm very excited to build some more. Some potential plans in the works are: -volume foot pedal, -pitch/clock bending using a 1799 chip, -alternative controllers, piezo/transistor based, -keyactivatable LEDs, -dumping/ replacing the ROM, -modular system, so each part (circuit, control, keyboard, speakers, power) is separately. </p> 
+	<p class="para">
+		Finally, thanks for reading!! :)
+   </body>
 </html>
